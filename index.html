@@ -12,7 +12,7 @@
             --color-text: #212121;
         }
         body {
-            font-family: 'Georgia', serif; /* Police plus senior */
+            font-family: 'Georgia', serif; 
             margin: 0;
             padding: 0;
             background-color: var(--color-secondary);
@@ -24,25 +24,7 @@
             overflow: hidden;
         }
 
-        /* --- Effet de Neige (Fond) --- */
-        .snow-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            background-image: radial-gradient(white 1px, transparent 0);
-            background-size: 50px 50px;
-            animation: snowfall 10s linear infinite;
-        }
-        @keyframes snowfall {
-            from { background-position: 0 0; }
-            to { background-position: 500px 500px; }
-        }
-
-        /* --- Écran d'Introduction Cinématique (plus simple/classe) --- */
+        /* --- Écran d'Introduction Cinématique --- */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -55,28 +37,67 @@
             align-items: center;
             z-index: 1000;
             transition: opacity 1.5s ease-out;
+            position: relative; /* Conteneur pour les décorations */
         }
         .logo-text-senior {
             font-size: 5em;
             font-weight: bold;
             letter-spacing: 0.15em;
             color: var(--color-secondary);
-            text-shadow: 0 0 10px var(--color-accent);
+            text-shadow: 0 0 15px var(--color-accent), 0 0 5px rgba(255, 255, 255, 0.8);
             opacity: 0;
             animation: fade-in-logo 2s ease-in-out 0.5s forwards;
             position: relative;
-        }
-        .logo-text-senior::after {
-            content: '⭐';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            font-size: 0.4em;
-            color: var(--color-accent);
+            z-index: 10;
         }
         @keyframes fade-in-logo {
             0% { opacity: 0; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Décorations de Noël --- */
+        .garland {
+            position: absolute;
+            top: 20px;
+            width: 90%;
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                var(--color-accent) 10px,
+                var(--color-accent) 20px
+            );
+            border-radius: 50%;
+            transform: rotate(-2deg);
+            opacity: 0.8;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            z-index: 5;
+        }
+        .tree {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(to top, #006400 30%, #388E3C 70%); /* Vert profond */
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .tree::before {
+            content: '⭐';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: var(--color-accent);
+        }
+        .tree-right {
+            right: 50px;
+            left: auto;
+            transform: scaleX(-1); /* Miroir pour l'autre côté */
         }
 
         /* --- Contenu Principal de la Page --- */
@@ -86,58 +107,33 @@
             text-align: center;
             max-width: 650px;
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.95); /* Fond pour la lisibilité */
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             z-index: 100;
         }
-        h1 {
-            color: var(--color-primary-senior);
-            font-size: 3em;
-            margin-bottom: 5px;
-        }
-        .tagline {
-            font-size: 1.3em;
-            color: var(--color-primary-senior);
-            font-style: italic;
-            margin-bottom: 40px;
-        }
-        .signature {
-            color: var(--color-accent);
-            font-weight: 600;
-            margin-top: 30px;
-            font-style: normal;
-        }
+        h1 { color: var(--color-primary-senior); font-size: 3em; margin-bottom: 5px; }
+        .tagline { font-size: 1.3em; color: var(--color-primary-senior); font-style: italic; margin-bottom: 40px; }
+        .signature { color: var(--color-accent); font-weight: 600; margin-top: 30px; font-style: normal; }
         .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            margin: 15px;
-            border: none;
-            border-radius: 30px; 
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1em;
+            display: inline-block; padding: 15px 35px; margin: 15px; border: none; border-radius: 30px; 
+            text-decoration: none; font-weight: 600; font-size: 1.1em;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); }
         .btn-start {
             background-color: var(--color-primary-senior);
             color: var(--color-secondary);
             box-shadow: 0 6px 12px rgba(194, 24, 91, 0.4);
         }
-        .btn-whatsapp {
-            background-color: #4CAF50; 
-            color: var(--color-secondary);
-        }
+        .btn-whatsapp { background-color: #4CAF50; color: var(--color-secondary); }
     </style>
 </head>
 <body>
-    <div class="snow-background"></div>
-
     <div id="intro-screen">
+        <div class="garland"></div>
+        <div class="tree"></div>
+        <div class="tree tree-right"></div>
         <div class="logo-text-senior">Xelira</div>
     </div>
 
@@ -148,7 +144,6 @@
         </p>
         
         <a href="dashboard.html" class="btn btn-start">➡️ COMMENCER MAINTENANT</a> 
-        
         <a href="https://whatsapp.com/channel/0029VbBZq0E4o7qSZJvGYs2x" class="btn btn-whatsapp" target="_blank">💬 REJOINDRE LA COMMUNAUTÉ</a>
 
         <p class="signature">
@@ -169,7 +164,7 @@
                     introScreen.style.display = 'none';
                     mainContent.style.opacity = '1';
                     document.body.style.overflow = 'auto'; 
-                }, 1500); // Transition plus longue pour l'effet senior
+                }, 1500); 
             }, 4000); 
         });
     </script>
