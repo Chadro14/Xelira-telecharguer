@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xelira - Dashboard Pro</title>
+    <title>Xelira - Tableau de Bord Pro</title>
     <style>
-        /* Variables */
+        /* Variables (Senior/Pro) */
         :root {
-            --color-primary-senior: #C2185B; 
-            --color-secondary: #F8F8FF; /* Blanc floral (adorable) */
-            --color-accent: #FFD700; 
-            --color-text: #212121;
-            --color-light-bg: #FFEBEF; /* Rose très pâle et adorable */
-            --color-shadow: rgba(0, 0, 0, 0.1);
+            --color-primary-senior: #C2185B; /* Rose Bourgogne */
+            --color-secondary: #F8F8FF; /* Blanc Floral */
+            --color-text: #333333; /* Gris foncé professionnel */
+            --color-light-bg: #FFEBEF; /* Rose très pâle et élégant */
+            --color-shadow: rgba(0, 0, 0, 0.15);
         }
         body {
             font-family: 'Georgia', serif; 
@@ -20,23 +19,24 @@
             padding: 0;
             background-color: var(--color-secondary);
             color: var(--color-text);
-            display: flex;
-            justify-content: center; 
-            min-height: 100vh;
         }
         .container {
-            width: 100%;
-            max-width: 800px; 
-            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto; 
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr; 
+            gap: 40px;
         }
 
         /* En-tête */
-        header {
+        .header-main {
+            grid-column: 1 / -1; 
             display: flex;
             align-items: center;
             border-bottom: 3px solid var(--color-primary-senior);
             padding-bottom: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .logo-placeholder {
             width: 45px;
@@ -51,7 +51,7 @@
             font-size: 1.8em;
             font-weight: bold;
         }
-        header h2 {
+        .header-main h2 {
             color: var(--color-primary-senior);
             margin: 0;
             font-size: 2.2em;
@@ -63,25 +63,24 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 20px var(--color-shadow);
-            margin-bottom: 30px; 
-            border: 1px solid #F5B0C4; 
+            border-left: 5px solid var(--color-primary-senior); 
         }
         .card h3 {
             color: var(--color-primary-senior);
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin-top: 0;
-            border-bottom: 2px solid var(--color-primary-senior);
+            border-bottom: 1px solid #F5B0C4; 
             padding-bottom: 10px;
-            margin-bottom: 20px;
         }
         
-        /* Téléchargeur */
+        /* Section de Téléchargement */
         .download-input-group {
             display: flex;
-            margin-top: 20px;
-            border: 2px solid var(--color-primary-senior); 
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid #CCC;
         }
         input[type="url"] {
             flex-grow: 1;
@@ -89,17 +88,22 @@
             border: none;
             font-size: 1.1em;
             outline: none;
-            background-color: white; 
+            background-color: white;
+            /* Correction: Assurer que l'input a une taille minimum pour que le bouton ne le masque pas */
+            min-width: 150px; 
         }
-        /* Bouton de soumission (TÉLÉCHARGER) */
         .btn-download {
             padding: 15px 30px;
-            background-color: var(--color-primary-senior);
-            color: var(--color-secondary);
+            /* Visibilité Forcée du Bouton */
+            background-color: var(--color-primary-senior); /* Rose foncé */
+            color: var(--color-secondary); /* Texte blanc */
             border: none;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.2s;
+            text-transform: uppercase;
+            /* Correction: Assurer que le bouton est au premier plan */
+            z-index: 2; 
         }
         .btn-download:hover {
             background-color: #9C144A;
@@ -108,78 +112,116 @@
 
         /* Conteneur de Résultats */
         #result-container {
-            margin-top: 30px;
+            margin-top: 40px;
             padding: 25px;
             background-color: white;
             border-radius: 8px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             min-height: 100px;
-            border-left: 5px solid #4CAF50; 
+            border: 1px dashed var(--color-primary-senior);
         }
-        /* Le lien de téléchargement APRES que le résultat soit affiché */
-        .download-link-result { 
+        .download-link {
             display: inline-block;
             margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #4CAF50; /* Vert succès */
+            padding: 14px 30px;
+            background-color: #4CAF50; 
             color: white;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 30px; 
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
         }
-        .download-link-result:hover {
+        .download-link:hover {
             background-color: #388E3C;
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
         }
         
         /* Infos Admin */
-        .admin-info p {
-            margin: 15px 0;
-            line-height: 1.6;
+        .admin-info {
+            padding: 30px 20px;
         }
         .admin-info strong {
-            color: var(--color-text);
+            color: var(--color-primary-senior); 
             font-weight: 600;
+        }
+
+        /* Responsive / Mobile First */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+                padding: 15px;
+            }
+            .header-main {
+                grid-column: 1 / 1;
+                margin-top: 10px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .download-input-group {
+                /* Empilement vertical sur mobile (Input puis Bouton) */
+                flex-direction: column; 
+                border: none;
+                box-shadow: none;
+            }
+            input[type="url"] {
+                border-radius: 8px;
+                margin: 5px 0;
+                width: 100%;
+                box-sizing: border-box; 
+                border: 1px solid #DDD;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            /* Assurer que le bouton est affiché en pleine largeur et visible sur mobile */
+            .btn-download {
+                 border-radius: 8px;
+                margin: 5px 0 10px 0; /* Marge en bas pour séparer de l'input */
+                width: 100%;
+                box-sizing: border-box;
+                padding: 15px; /* Rétablit la hauteur du bouton */
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         
-        <header>
+        <header class="header-main">
             <div class="logo-placeholder">X</div> 
             <h2>Xelira Pro Dashboard</h2>
         </header>
 
         <div class="card download-section">
-            <h3>Outil de Téléchargement [API TikWM]</h3>
-            <p>**Instruction :** Collez le lien de la vidéo TikTok ci-dessous et cliquez sur **TÉLÉCHARGER**.</p>
+            <h3>Outil de Téléchargement Expert</h3>
+            <p>Insérez le lien de la vidéo TikTok. Notre moteur utilise l'API **`tikwm.com`** pour un traitement rapide et professionnel.</p>
             
             <div class="download-input-group">
-                <input type="url" id="tiktok-url" placeholder="https://vm.tiktok.com/..." required>
+                <input type="url" id="tiktok-url" placeholder="Collez votre lien TikTok ici : https://vm.tiktok.com/..." required>
                 <button class="btn-download" onclick="downloadVideo()">TÉLÉCHARGER</button>
             </div>
             
             <div id="result-container">
-                <p>Prêt à traiter votre demande...</p>
+                <p style="color: #757575;">Prêt à traiter votre demande...</p>
             </div>
         </div>
 
         <div class="card admin-info">
-            <h3>Informations Support (Admin)</h3>
-            <p>Un service professionnel géré par l'équipe Altesse.</p>
-            <hr style="border: 0; border-top: 1px solid #F5B0C4; margin: 15px 0;">
+            <h3>Aperçu du Support</h3>
+            <p>Notre engagement est d'assurer **Performance et Fiabilité** pour vos besoins média les plus exigeants.</p>
+            <hr style="border: 0; border-top: 1px solid #F5B0C4;">
             <p><strong>Nom :</strong> Altesse (Fondatrice)</p>
             <p><strong>Société :</strong> Xelira-Music Tech Solutions</p>
             <p><strong>Contact Admin :</strong> support@xelira-music.com</p>
+            <p style="font-size: 0.9em; margin-top: 25px; color: #757575;">**Note :** Utilisation de l'API tikwm.com pour le traitement des liens externes.</p>
         </div>
 
     </div>
 
     <script>
-        // L'API à utiliser
-        const API_BASE_URL = 'https://tikwm.com/api/?url='; 
+        const API_BASE_URL = 'https://tikwm.com/api/?url=';
 
         async function downloadVideo() {
             const urlInput = document.getElementById('tiktok-url').value;
@@ -193,7 +235,6 @@
             resultContainer.innerHTML = '<p style="color: var(--color-primary-senior); font-style: italic;">⚙️ Requête envoyée à l\'API...</p>';
 
             try {
-                // Construction de l'URL de l'API
                 const apiURL = `${API_BASE_URL}${encodeURIComponent(urlInput)}`;
                 
                 const response = await fetch(apiURL);
@@ -204,16 +245,15 @@
                     const description = data.data.title || 'Vidéo TikTok Xelira';
                     const filename = description.replace(/[^a-z0-9]/gi, '_').substring(0, 40) + '.mp4';
 
-                    // BOUTON TÉLÉCHARGER AFFICHÉ APRÈS LE SUCCÈS
                     resultContainer.innerHTML = `
                         <h4>🎉 Succès ! Votre téléchargement est prêt.</h4>
                         <p>Titre : <strong>${description}</strong></p>
-                        <a href="${videoUrl}" download="${filename}" class="download-link-result" target="_blank">
+                        <a href="${videoUrl}" download="${filename}" class="download-link" target="_blank">
                             ⬇️ TÉLÉCHARGER LE FICHIER MP4
                         </a>
                     `;
                 } else {
-                    resultContainer.innerHTML = '<p style="color: #D32F2F; font-weight: bold;">❌ ERREUR : La vidéo n\'a pas pu être trouvée ou l\'API est indisponible. Vérifiez le lien.</p>';
+                    resultContainer.innerHTML = '<p style="color: #D32F2F; font-weight: bold;">❌ ERREUR : La vidéo n\'a pas pu être trouvée ou l\'API est indisponible. Veuillez vérifier le lien et réessayer.</p>';
                 }
 
             } catch (error) {
