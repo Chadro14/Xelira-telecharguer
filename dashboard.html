@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xelira - Tableau de Bord Pro</title>
+    <title>Xelira - Dashboard Pro</title>
     <style>
         /* Variables */
         :root {
-            --color-primary: #E91E63; 
-            --color-secondary: #FAFAFA; 
+            --color-primary-senior: #C2185B; 
+            --color-secondary: #F8F8FF; /* Blanc floral (adorable) */
+            --color-accent: #FFD700; 
             --color-text: #212121;
-            --color-light-bg: #FCE4EC; 
+            --color-light-bg: #FFEBEF; /* Rose très pâle et adorable */
             --color-shadow: rgba(0, 0, 0, 0.1);
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Georgia', serif; 
             margin: 0;
             padding: 0;
             background-color: var(--color-secondary);
             color: var(--color-text);
+            display: flex;
+            justify-content: center; 
+            min-height: 100vh;
         }
         .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 3fr 1fr; /* Structure principale : Téléchargeur (Large) / Admin (Étroit) */
-            gap: 40px;
+            width: 100%;
+            max-width: 800px; 
+            padding: 40px 20px;
         }
 
         /* En-tête */
-        .header-main {
-            grid-column: 1 / -1; /* S'étend sur toute la largeur */
+        header {
             display: flex;
             align-items: center;
-            border-bottom: 3px solid var(--color-primary);
+            border-bottom: 3px solid var(--color-primary-senior);
             padding-bottom: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .logo-placeholder {
             width: 45px;
             height: 45px;
-            background-color: var(--color-primary);
+            background-color: var(--color-primary-senior);
             border-radius: 50%;
             margin-right: 15px;
             display: flex;
@@ -51,10 +51,10 @@
             font-size: 1.8em;
             font-weight: bold;
         }
-        .header-main h2 {
-            color: var(--color-primary);
+        header h2 {
+            color: var(--color-primary-senior);
             margin: 0;
-            font-size: 2em;
+            font-size: 2.2em;
         }
 
         /* Cartes de section */
@@ -63,18 +63,23 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 20px var(--color-shadow);
+            margin-bottom: 30px; 
+            border: 1px solid #F5B0C4; 
         }
         .card h3 {
-            color: var(--color-primary);
+            color: var(--color-primary-senior);
             font-size: 1.5em;
             margin-top: 0;
+            border-bottom: 2px solid var(--color-primary-senior);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
         
-        /* Section de Téléchargement (Grille Interne) */
+        /* Téléchargeur */
         .download-input-group {
             display: flex;
             margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--color-primary-senior); 
             border-radius: 8px;
             overflow: hidden;
         }
@@ -84,54 +89,51 @@
             border: none;
             font-size: 1.1em;
             outline: none;
+            background-color: white; 
         }
+        /* Bouton de soumission (TÉLÉCHARGER) */
         .btn-download {
             padding: 15px 30px;
-            background-color: var(--color-primary);
+            background-color: var(--color-primary-senior);
             color: var(--color-secondary);
             border: none;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .btn-download:hover {
-            background-color: #C2185B;
+            background-color: #9C144A;
+            transform: translateY(-1px);
         }
 
         /* Conteneur de Résultats */
         #result-container {
-            margin-top: 40px;
+            margin-top: 30px;
             padding: 25px;
-            background-color: var(--color-secondary);
+            background-color: white;
             border-radius: 8px;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
             text-align: center;
             min-height: 100px;
-            border-left: 5px solid var(--color-primary);
+            border-left: 5px solid #4CAF50; 
         }
-        .download-link {
+        /* Le lien de téléchargement APRES que le résultat soit affiché */
+        .download-link-result { 
             display: inline-block;
             margin-top: 20px;
             padding: 12px 25px;
-            background-color: #4CAF50; 
+            background-color: #4CAF50; /* Vert succès */
             color: white;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
             transition: background-color 0.3s;
         }
-        .download-link:hover {
+        .download-link-result:hover {
             background-color: #388E3C;
         }
         
         /* Infos Admin */
-        .admin-info {
-            padding: 30px 20px;
-        }
-        .admin-info h3 {
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 10px;
-        }
         .admin-info p {
             margin: 15px 0;
             line-height: 1.6;
@@ -140,32 +142,22 @@
             color: var(--color-text);
             font-weight: 600;
         }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr; /* Passage à une seule colonne sur mobile/tablette */
-            }
-            .header-main {
-                grid-column: 1 / 1;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         
-        <header class="header-main">
+        <header>
             <div class="logo-placeholder">X</div> 
             <h2>Xelira Pro Dashboard</h2>
         </header>
 
         <div class="card download-section">
-            <h3>Téléchargement Rapide TikTok</h3>
-            <p>Insérez le lien de la vidéo TikTok. Notre moteur utilise l'API **`https://tikwm.com/api/?url=`** pour récupérer le contenu de manière optimale.</p>
+            <h3>Outil de Téléchargement [API TikWM]</h3>
+            <p>**Instruction :** Collez le lien de la vidéo TikTok ci-dessous et cliquez sur **TÉLÉCHARGER**.</p>
             
             <div class="download-input-group">
-                <input type="url" id="tiktok-url" placeholder="Collez votre lien TikTok ici : https://vm.tiktok.com/..." required>
+                <input type="url" id="tiktok-url" placeholder="https://vm.tiktok.com/..." required>
                 <button class="btn-download" onclick="downloadVideo()">TÉLÉCHARGER</button>
             </div>
             
@@ -175,19 +167,19 @@
         </div>
 
         <div class="card admin-info">
-            <h3>Aperçu du Support</h3>
-            <p>Notre engagement : Performance et Fiabilité.</p>
-            <hr style="border: 0; border-top: 1px solid #FFCDD2;">
+            <h3>Informations Support (Admin)</h3>
+            <p>Un service professionnel géré par l'équipe Altesse.</p>
+            <hr style="border: 0; border-top: 1px solid #F5B0C4; margin: 15px 0;">
             <p><strong>Nom :</strong> Altesse (Fondatrice)</p>
             <p><strong>Société :</strong> Xelira-Music Tech Solutions</p>
             <p><strong>Contact Admin :</strong> support@xelira-music.com</p>
-            <p style="font-size: 0.9em; margin-top: 25px; color: #757575;">**Note :** Xelira utilise une technologie tierce (tikwm.com) pour le traitement des liens.</p>
         </div>
 
     </div>
 
     <script>
-        const API_BASE_URL = 'https://tikwm.com/api/?url=';
+        // L'API à utiliser
+        const API_BASE_URL = 'https://tikwm.com/api/?url='; 
 
         async function downloadVideo() {
             const urlInput = document.getElementById('tiktok-url').value;
@@ -198,10 +190,10 @@
                 return;
             }
 
-            resultContainer.innerHTML = '<p style="color: #E91E63; font-style: italic;">⚙️ Requête envoyée à l\'API...</p>';
+            resultContainer.innerHTML = '<p style="color: var(--color-primary-senior); font-style: italic;">⚙️ Requête envoyée à l\'API...</p>';
 
             try {
-                // *** Rappel : L'appel direct peut être bloqué par les restrictions CORS en mode statique. ***
+                // Construction de l'URL de l'API
                 const apiURL = `${API_BASE_URL}${encodeURIComponent(urlInput)}`;
                 
                 const response = await fetch(apiURL);
@@ -212,15 +204,16 @@
                     const description = data.data.title || 'Vidéo TikTok Xelira';
                     const filename = description.replace(/[^a-z0-9]/gi, '_').substring(0, 40) + '.mp4';
 
+                    // BOUTON TÉLÉCHARGER AFFICHÉ APRÈS LE SUCCÈS
                     resultContainer.innerHTML = `
                         <h4>🎉 Succès ! Votre téléchargement est prêt.</h4>
                         <p>Titre : <strong>${description}</strong></p>
-                        <a href="${videoUrl}" download="${filename}" class="download-link" target="_blank">
+                        <a href="${videoUrl}" download="${filename}" class="download-link-result" target="_blank">
                             ⬇️ TÉLÉCHARGER LE FICHIER MP4
                         </a>
                     `;
                 } else {
-                    resultContainer.innerHTML = '<p style="color: #D32F2F; font-weight: bold;">❌ ERREUR : La vidéo n\'a pas pu être trouvée ou l\'API est indisponible. Veuillez vérifier le lien et réessayer.</p>';
+                    resultContainer.innerHTML = '<p style="color: #D32F2F; font-weight: bold;">❌ ERREUR : La vidéo n\'a pas pu être trouvée ou l\'API est indisponible. Vérifiez le lien.</p>';
                 }
 
             } catch (error) {
@@ -230,5 +223,4 @@
         }
     </script>
 </body>
-    </html>
-                    
+</html>
