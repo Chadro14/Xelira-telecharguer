@@ -7,14 +7,15 @@
     <style>
         /* Variables */
         :root {
-            --color-primary: #E91E63; 
-            --color-secondary: #FAFAFA; 
+            --color-primary-senior: #C2185B; 
+            --color-secondary: #F8F8FF; /* Blanc floral (adorable) */
+            --color-accent: #FFD700; 
             --color-text: #212121;
-            --color-light-bg: #FCE4EC; 
+            --color-light-bg: #FFEBEF; /* Rose très pâle et adorable */
             --color-shadow: rgba(0, 0, 0, 0.1);
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Georgia', serif; 
             margin: 0;
             padding: 0;
             background-color: var(--color-secondary);
@@ -33,14 +34,14 @@
         header {
             display: flex;
             align-items: center;
-            border-bottom: 3px solid var(--color-primary);
+            border-bottom: 3px solid var(--color-primary-senior);
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
         .logo-placeholder {
             width: 45px;
             height: 45px;
-            background-color: var(--color-primary);
+            background-color: var(--color-primary-senior);
             border-radius: 50%;
             margin-right: 15px;
             display: flex;
@@ -51,7 +52,7 @@
             font-weight: bold;
         }
         header h2 {
-            color: var(--color-primary);
+            color: var(--color-primary-senior);
             margin: 0;
             font-size: 2.2em;
         }
@@ -63,12 +64,13 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px var(--color-shadow);
             margin-bottom: 30px; 
+            border: 1px solid #F5B0C4; /* Contour doux et adorable */
         }
         .card h3 {
-            color: var(--color-primary);
+            color: var(--color-primary-senior);
             font-size: 1.5em;
             margin-top: 0;
-            border-bottom: 2px solid var(--color-primary);
+            border-bottom: 2px solid var(--color-primary-senior);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -77,7 +79,7 @@
         .download-input-group {
             display: flex;
             margin-top: 20px;
-            border: 2px solid var(--color-primary); 
+            border: 2px solid var(--color-primary-senior); 
             border-radius: 8px;
             overflow: hidden;
         }
@@ -89,17 +91,19 @@
             outline: none;
             background-color: white; 
         }
+        /* Style spécifique du bouton Télécharger */
         .btn-download {
             padding: 15px 30px;
-            background-color: var(--color-primary);
+            background-color: var(--color-primary-senior);
             color: var(--color-secondary);
             border: none;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .btn-download:hover {
-            background-color: #C2185B;
+            background-color: #9C144A;
+            transform: translateY(-1px);
         }
 
         /* Conteneur de Résultats */
@@ -148,8 +152,8 @@
         </header>
 
         <div class="card download-section">
-            <h3>Téléchargeur TikTok (via API : tikwm.com)</h3>
-            <p>**Action :** Collez le lien de la vidéo TikTok ci-dessous et cliquez sur **TÉLÉCHARGER**.</p>
+            <h3>Outil de Téléchargement [API TikWM]</h3>
+            <p>**Instruction :** Collez le lien de la vidéo TikTok ci-dessous et cliquez sur **TÉLÉCHARGER**.</p>
             
             <div class="download-input-group">
                 <input type="url" id="tiktok-url" placeholder="https://vm.tiktok.com/..." required>
@@ -163,8 +167,8 @@
 
         <div class="card admin-info">
             <h3>Informations Support (Admin)</h3>
-            <p>Notre engagement : Performance et Fiabilité. Contactez-nous en cas de problème.</p>
-            <hr style="border: 0; border-top: 1px solid #FFCDD2; margin: 15px 0;">
+            <p>Un service professionnel géré par l'équipe Altesse.</p>
+            <hr style="border: 0; border-top: 1px solid #F5B0C4; margin: 15px 0;">
             <p><strong>Nom :</strong> Altesse (Fondatrice)</p>
             <p><strong>Société :</strong> Xelira-Music Tech Solutions</p>
             <p><strong>Contact Admin :</strong> support@xelira-music.com</p>
@@ -185,7 +189,7 @@
                 return;
             }
 
-            resultContainer.innerHTML = '<p style="color: #E91E63; font-style: italic;">⚙️ Requête envoyée à l\'API...</p>';
+            resultContainer.innerHTML = '<p style="color: var(--color-primary-senior); font-style: italic;">⚙️ Requête envoyée à l\'API...</p>';
 
             try {
                 // Construction de l'URL de l'API
