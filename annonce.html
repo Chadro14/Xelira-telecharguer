@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XELIRA • Annonces</title>
+<title>XELIRA • Produits</title>
 
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -25,33 +25,43 @@ header{
 }
 header h1{color:#ff007f;}
 .container{
-    max-width:800px;
+    max-width:1200px;
     margin:auto;
     padding:20px;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:20px;
 }
 .card{
     background:#111;
     border:1px solid #1f1f1f;
     border-radius:16px;
     padding:15px;
-    margin-bottom:15px;
-    opacity:0;
-    transform:translateY(15px);
-    animation:fadeIn 0.5s forwards;
+    text-align:center;
     transition:transform 0.3s, box-shadow 0.3s;
 }
 .card:hover{
     transform:translateY(-5px);
     box-shadow:0 0 20px #ff007f;
 }
-input, textarea{
+.card img{
     width:100%;
-    padding:10px;
+    border-radius:12px;
     margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #1f1f1f;
-    background:#000;
-    color:#fff;
+}
+.card h3{
+    margin:5px 0;
+}
+.card p{
+    font-size:14px;
+    color:#ccc;
+}
+.price{
+    font-weight:bold;
+    margin:5px 0 10px 0;
 }
 button{
     background:#ff007f;
@@ -61,6 +71,10 @@ button{
     color:#000;
     font-weight:bold;
     cursor:pointer;
+    transition:background 0.3s;
+}
+button:hover{
+    background:#e60073;
 }
 footer{
     text-align:center;
@@ -68,32 +82,14 @@ footer{
     border-top:1px solid #1f1f1f;
     color:#777;
 }
-.announcement-date{
-    font-size:12px;
-    color:#aaa;
-    margin-bottom:5px;
-}
-@keyframes fadeIn{
-    to{opacity:1; transform:translateY(0);}
-}
-.typewriter{
-    overflow:hidden;
-    white-space:nowrap;
-    border-right:3px solid #ff007f;
-    animation:typing 1s steps(40,end) forwards;
-}
-@keyframes typing{
-    from{width:0;}
-    to{width:100%;}
-}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>📢 Annonces XELIRA</h1>
-    <p>Restez informé des dernières nouvelles</p>
+    <h1>🛒 Produits XELIRA</h1>
+    <p>Choisissez un produit et contactez directement via WhatsApp</p>
 </header>
 
 <div id="root" class="container"></div>
@@ -101,80 +97,54 @@ footer{
 <footer>© Xelira Studio</footer>
 
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState } = React;
 
-function TypeWriter({text}) {
-    const [display, setDisplay] = useState("");
-
-    useEffect(()=>{
-        let i=0;
-        const interval = setInterval(()=>{
-            setDisplay(text.slice(0,i+1));
-            i++;
-            if(i>=text.length) clearInterval(interval);
-        },15); // vitesse d'écriture
-        return ()=>clearInterval(interval);
-    },[text]);
-
-    return <p className="typewriter">{display}</p>;
-}
+// Remplace ce numéro par le tien
+const whatsappNumber = "243861009310";
 
 function App(){
-    const fakeAnnouncements = [
-        {title:"Nouvelle version XELIRA", text:"La version 2.0 est maintenant disponible !", date:"2026-02-13"},
-        {title:"Maintenance programmée", text:"Serveur en maintenance ce soir de 23h à 01h.", date:"2026-02-12"},
-        {title:"Astuce du jour", text:"Téléchargez vos vidéos TikTok sans watermark facilement.", date:"2026-02-10"}
+
+    const products = [
+        {
+            name:"Xelira Booster",
+            image:"https://via.placeholder.com/300x200.png?text=Xelira+Booster",
+            description:"Boostez vos abonnés sur TikTok et Instagram.",
+            price:"3000 FC"
+        },
+        {
+            name:"Xelira Downloader",
+            image:"https://via.placeholder.com/300x200.png?text=Xelira+Downloader",
+            description:"Téléchargez des vidéos sans watermark.",
+            price:"1500 FC"
+        },
+        {
+            name:"Xelira Monetizer",
+            image:"https://via.placeholder.com/300x200.png?text=Xelira+Monetizer",
+            description:"Monétisez vos comptes sociaux facilement.",
+            price:"5000 FC"
+        },
+        {
+            name:"Xelira Pro Tools",
+            image:"https://via.placeholder.com/300x200.png?text=Xelira+Pro+Tools",
+            description:"Pack complet pour professionnels du social media.",
+            price:"10000 FC"
+        }
     ];
 
-    const [announcements, setAnnouncements] = useState([]);
-    const [title, setTitle] = useState("");
-    const [text, setText] = useState("");
-
-    useEffect(()=>{
-        const saved = JSON.parse(localStorage.getItem("xelira_announcements"));
-        if(saved){
-            setAnnouncements(saved);
-        }else{
-            setAnnouncements(fakeAnnouncements);
-            localStorage.setItem("xelira_announcements", JSON.stringify(fakeAnnouncements));
-        }
-    },[]);
-
-    const addAnnouncement = ()=>{
-        if(!title || !text) return alert("Veuillez remplir tous les champs");
-
-        const newAnnouncement = {title, text, date: new Date().toISOString().slice(0,10)};
-        const updated = [newAnnouncement, ...announcements];
-
-        setAnnouncements(updated);
-        localStorage.setItem("xelira_announcements", JSON.stringify(updated));
-
-        setTitle(""); setText("");
+    const handleContact = (productName) => {
+        const message = encodeURIComponent(`Bonjour, je suis intéressé par : ${productName}`);
+        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
     };
 
     return(
-        <div>
-            <h2>Ajouter une annonce</h2>
-            <input 
-                placeholder="Titre de l'annonce"
-                value={title}
-                onChange={e=>setTitle(e.target.value)}
-            />
-            <textarea 
-                placeholder="Texte de l'annonce"
-                value={text}
-                onChange={e=>setText(e.target.value)}
-            />
-            <button onClick={addAnnouncement}>Publier</button>
-
-            <hr style={{margin:"25px 0",borderColor:"#1f1f1f"}}/>
-
-            <h2>Liste des annonces</h2>
-            {announcements.map((a,index)=>(
-                <div className="card" key={index} style={{animationDelay:`${index*0.1}s`}}>
-                    <div className="announcement-date">{a.date}</div>
-                    <strong>{a.title}</strong>
-                    <TypeWriter text={a.text}/>
+        <div className="grid">
+            {products.map((p,index)=>(
+                <div className="card" key={index}>
+                    <img src={p.image} alt={p.name}/>
+                    <h3>{p.name}</h3>
+                    <p>{p.description}</p>
+                    <div className="price">{p.price}</div>
+                    <button onClick={()=>handleContact(p.name)}>📩 Contacter</button>
                 </div>
             ))}
         </div>
@@ -182,7 +152,6 @@ function App(){
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-
 </script>
 
 </body>
