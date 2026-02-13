@@ -1,158 +1,213 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xelira - Accueil Professionnel</title>
-    <style>
-        :root {
-            --color-primary: #E91E63; /* Magenta */
-            --color-secondary: #FAFAFA; 
-            --color-text: #212121;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-secondary);
-            color: var(--color-text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XELIRA • Dashboard</title>
 
-        /* --- Écran d'Introduction Cinématique --- */
-        #intro-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-text); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease-out;
-        }
-        .logo-container {
-            font-size: 4em;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            position: relative;
-            color: transparent; 
-            -webkit-text-stroke: 1px var(--color-primary); 
-        }
-        .logo-container::before {
-            content: 'Xelira';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            color: var(--color-primary); 
-            overflow: hidden;
-            border-right: 4px solid var(--color-primary); 
-            animation: text-reveal 2s steps(8) forwards,
-                       blinking-cursor 0.7s infinite;
-        }
-        @keyframes text-reveal {
-            0% { width: 0%; border-right: 4px solid var(--color-primary); }
-            100% { width: 100%; border-right: none; }
-        }
-        @keyframes blinking-cursor {
-            0%, 100% { border-color: var(--color-primary); }
-            50% { border-color: transparent; }
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        /* --- Contenu Principal de la Page --- */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1s ease-in;
-            text-align: center;
-            max-width: 650px;
-            padding: 20px;
-        }
-        h1 {
-            color: var(--color-primary);
-            font-size: 3em;
-            margin-bottom: 5px;
-        }
-        .tagline {
-            font-size: 1.2em;
-            color: #616161;
-            margin-bottom: 40px;
-        }
-        .signature {
-            color: var(--color-primary);
-            font-weight: 600;
-            margin-top: 20px;
-            font-style: italic;
-        }
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            margin: 15px;
-            border: none;
-            border-radius: 30px; 
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-        }
-        .btn-start {
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-        }
-        .btn-whatsapp {
-            background-color: #4CAF50; 
-            color: var(--color-secondary);
-        }
-    </style>
+<style>
+:root{
+    --pink:#ff007f;
+    --bg:#0a0a0a;
+    --card:#111;
+    --border:#1f1f1f;
+}
+*{box-sizing:border-box;font-family:Inter,sans-serif;margin:0;padding:0}
+body{background:var(--bg);color:#fff}
+
+/* HEADER */
+header{
+    height:60px;display:flex;align-items:center;justify-content:flex-end;
+    padding:0 20px;border-bottom:1px solid var(--border);
+    position:fixed;width:100%;top:0;background:var(--bg);z-index:100;
+}
+.hamburger{font-size:26px;cursor:pointer}
+
+/* MENU */
+.menu{
+    position:absolute;top:60px;right:20px;
+    background:#000;border:1px solid var(--border);
+    border-radius:12px;width:230px;
+    opacity:0;transform:translateY(-20px);
+    pointer-events:none;transition:.4s;z-index:200;
+}
+.menu.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.menu a{
+    display:block;padding:14px;color:#ccc;text-decoration:none;
+    border-bottom:1px solid var(--border);
+}
+.menu a:hover{background:var(--pink);color:#000}
+
+/* DASHBOARD */
+.dashboard{
+    min-height:100vh;
+    display:flex;justify-content:center;
+    padding:120px 15px 30px;
+}
+.card{
+    width:100%;max-width:560px;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:30px;text-align:center;
+}
+.grid{
+    border:1px dashed var(--border);
+    border-radius:16px;padding:25px;margin-bottom:25px;
+}
+.grid h3{font-size:14px;color:#bbb;margin-bottom:15px}
+input{
+    width:100%;padding:14px;border-radius:12px;
+    border:1px solid var(--border);background:#000;color:#fff;
+}
+button{
+    margin-top:15px;width:100%;padding:14px;
+    border:none;border-radius:12px;
+    background:var(--pink);color:#000;font-weight:bold;cursor:pointer;
+}
+
+/* LOADING */
+.loading{display:none;margin-top:25px}
+.spinner{
+    width:55px;height:55px;border:5px solid #222;
+    border-top:5px solid var(--pink);
+    border-radius:50%;animation:spin 1s linear infinite;margin:auto;
+}
+.loading p{margin-top:12px;font-size:13px;color:#aaa}
+
+/* RESULT */
+.result{display:none;margin-top:25px}
+.video-card{
+    background:#000;border:1px solid var(--border);
+    border-radius:16px;padding:15px;
+}
+.video-card video{
+    width:100%;border-radius:12px;
+    box-shadow:0 0 25px var(--pink);
+}
+
+/* HELP */
+.help{
+    margin-top:25px;border-top:1px solid var(--border);
+    padding-top:20px;
+}
+.help p{font-size:13px;color:#777}
+.help a{
+    display:inline-flex;align-items:center;gap:8px;
+    margin:6px;padding:10px 14px;border-radius:12px;
+    text-decoration:none;font-size:13px;color:#fff;
+}
+.whatsapp{background:#25D366}
+.gmail{background:#d44638}
+
+/* FOOTER */
+footer{
+    height:60px;display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:#666;border-top:1px solid var(--border);
+}
+footer span{color:var(--pink)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
+
 <body>
-    <div id="intro-screen">
-        <div class="logo-container">Xelira</div>
+
+<header>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+</header>
+
+<div class="menu" id="menu">
+    <a href="historique.html">📜 Historique</a>
+    <a href="#">📢 Annonce</a>
+    <a href="#">⭐ Avis</a>
+</div>
+
+<div class="dashboard">
+<div class="card">
+
+    <div class="grid">
+        <h3>Collez le lien TikTok ci-dessous</h3>
+        <input id="videoLink" placeholder="https://www.tiktok.com/...">
+        <button onclick="downloadVideo()">Télécharger</button>
     </div>
 
-    <div class="main-content" id="main-content">
-        <h1>Xelira-Music</h1>
-        <p class="tagline">
-            Bienvenue sur votre plateforme de téléchargement haute-fidélité pour musiques et vidéos, optimisée pour TikTok.
-        </p>
-        <p class="signature">
-            By Son Altesse Royal.
-        </p>
-
-        <a href="dashboard.html" class="btn btn-start">➡️ COMMENCER MAINTENANT</a> 
-        
-        <a href="https://whatsapp.com/channel/0029Vb7qflCBVJkxljQdd31O" class="btn btn-whatsapp" target="_blank">💬 VOIR NOTRE COMMUNAUTÉ WHATSAPP</a>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Traitement sécurisé par Xelira...</p>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const introScreen = document.getElementById('intro-screen');
-            const mainContent = document.getElementById('main-content');
-            
-            // Masque l'écran d'introduction après l'animation (3 secondes)
-            setTimeout(() => {
-                introScreen.style.opacity = '0';
-                
-                setTimeout(() => {
-                    introScreen.style.display = 'none';
-                    mainContent.style.opacity = '1';
-                    document.body.style.overflow = 'auto'; 
-                }, 1000); 
-            }, 3000); 
-        });
-    </script>
-    
+    <div class="result" id="result">
+        <p style="color:var(--pink);font-weight:bold;margin-bottom:10px">
+            ✔ Vidéo prête
+        </p>
+        <div class="video-card">
+            <video controls id="resultVideo"></video>
+            <a id="downloadBtn" class="whatsapp" style="display:block;margin-top:15px" download>
+                ⬇ Télécharger MP4
+            </a>
+        </div>
+    </div>
+
+    <div class="help">
+        <p>Support client :</p>
+        <a class="whatsapp" href="https://wa.me/243861009310" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a class="gmail" href="mailto:Xelirastudio@gmail.com">
+            <i class="fas fa-envelope"></i> Gmail
+        </a>
+    </div>
+
+</div>
+</div>
+
+<footer>© Xelira-studio — <span>Son Altesse</span></footer>
+
+<script>
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("show");
+}
+
+async function downloadVideo(){
+    const link = videoLink.value.trim();
+    if(!link) return alert("Lien TikTok requis");
+
+    loading.style.display="block";
+    result.style.display="none";
+
+    try{
+        const api = `https://tikwm.com/api/?url=${encodeURIComponent(link)}`;
+        const res = await fetch(api);
+        const data = await res.json();
+
+        if(data.code===0 && data.data.play){
+            resultVideo.src = data.data.play;
+            downloadBtn.href = data.data.play;
+            downloadBtn.download = "xelira-video.mp4";
+
+            // 🔥 HISTORIQUE
+            const history = JSON.parse(localStorage.getItem("xelira_history")) || [];
+            history.push({
+                url:data.data.play,
+                date:new Date().toLocaleString()
+            });
+            localStorage.setItem("xelira_history", JSON.stringify(history));
+
+            loading.style.display="none";
+            result.style.display="block";
+        }else{
+            loading.style.display="none";
+            alert("Vidéo introuvable");
+        }
+    }catch(e){
+        loading.style.display="none";
+        alert("Erreur API ou réseau");
+        console.error(e);
+    }
+}
+</script>
+
 </body>
 </html>
