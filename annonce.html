@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XELIRA • Historique</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{margin:0;background:#0a0a0a;color:#fff;font-family:Inter}
+header{text-align:center;padding:20px;border-bottom:1px solid #1f1f1f}
+header h1{color:#ff007f}
+.container{max-width:900px;margin:auto;padding:20px}
+.item{
+    background:#111;border:1px solid #1f1f1f;
+    border-radius:16px;padding:15px;margin-bottom:15px;
+}
+.item video{width:100%;border-radius:12px}
+.item p{font-size:12px;color:#888;margin-top:8px}
+.clear{
+    background:#ff007f;color:#000;
+    border:none;padding:12px 18px;
+    border-radius:12px;font-weight:bold;cursor:pointer;
+}
+.empty{text-align:center;color:#666;margin-top:40px}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📜 Historique Xelira</h1>
+    <p>Toutes les vidéos téléchargées</p>
+</header>
+
+<div class="container">
+    <button class="clear" onclick="clearHistory()">🗑 Effacer l’historique</button>
+    <div id="list"></div>
+</div>
+
+<script>
+const list = document.getElementById("list");
+const history = JSON.parse(localStorage.getItem("xelira_history")) || [];
+
+if(history.length===0){
+    list.innerHTML = "<p class='empty'>Aucune vidéo téléchargée</p>";
+}else{
+    history.reverse().forEach(v=>{
+        const div = document.createElement("div");
+        div.className="item";
+        div.innerHTML=`
+            <video controls src="${v.url}"></video>
+            <p>Ajouté le : ${v.date}</p>
+        `;
+        list.appendChild(div);
+    });
+}
+
+function clearHistory(){
+    if(confirm("Supprimer tout l’historique ?")){
+        localStorage.removeItem("xelira_history");
+        location.reload();
+    }
+}
+</script>
+
+</body>
+</html>
