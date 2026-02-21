@@ -4,179 +4,272 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XELIRA • Annonces</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0a0a0a;
-    color: #fff;
+
+:root{
+--blue:#1677ff;
+--blueGlow:rgba(22,119,255,0.35);
+--bg:#f5f9ff;
+--white:#ffffff;
+--border:#e1e9ff;
+--text:#0f172a;
+--gray:#64748b;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #1f1f1f;
-    background: #111;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:linear-gradient(180deg,#ffffff,var(--bg));
+color:var(--text);
 }
 
-header h1 {
-    color: #ff007f;
-    font-size: 1.5em;
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 22px;
+background:#fff;
+border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:100;
 }
 
-header a {
-    background: #ff007f;
-    color: #000;
-    padding: 10px 15px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
+header h1{
+color:var(--blue);
+font-size:1.5em;
+letter-spacing:1px;
 }
 
-header a:hover {
-    background: #e60073;
+header a{
+background:var(--blue);
+color:#fff;
+padding:10px 16px;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+header a:hover{
+box-shadow:0 8px 20px var(--blueGlow);
+transform:translateY(-2px);
 }
 
-.card {
-    background: #111;
-    border: 1px solid #1f1f1f;
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+/* GRID */
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:0 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 0, 127, 0.4);
+/* CARD */
+
+.card{
+background:var(--white);
+border:1px solid var(--border);
+border-radius:18px;
+padding:22px;
+text-align:center;
+transition:.35s;
+position:relative;
+overflow:hidden;
+animation:floatCard 6s ease-in-out infinite;
 }
 
-.card img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    border: 2px solid #ff007f;
+/* lumière qui passe */
+.card::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+transform:rotate(25deg);
+opacity:0;
+transition:0.6s;
 }
 
-.card h3 {
-    margin: 10px 0 5px;
-    font-size: 1.2em;
-    color: #ff007f;
+.card:hover::before{
+opacity:1;
+left:100%;
 }
 
-.card p.description {
-    font-size: 0.95em;
-    color: #ccc;
-    margin-bottom: 10px;
+/* hover */
+.card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 20px 40px var(--blueGlow);
 }
 
-.card p.price {
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #ff99c2;
+/* badge nouveau */
+
+.badge{
+position:absolute;
+top:12px;
+left:12px;
+background:var(--blue);
+color:#fff;
+font-size:11px;
+padding:5px 9px;
+border-radius:8px;
+font-weight:600;
 }
 
-.card a.whatsapp-btn {
-    display: inline-block;
-    padding: 12px 20px;
-    background: #ff007f;
-    color: #000;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+/* image */
+
+.card img{
+width:110px;
+height:110px;
+object-fit:contain;
+margin-bottom:15px;
+border-radius:14px;
+border:2px solid var(--blue);
 }
 
-.card a.whatsapp-btn:hover {
-    background: #e60073;
-    transform: translateY(-2px);
+/* text */
+
+.card h3{
+margin:10px 0 6px;
+font-size:1.2em;
+color:var(--blue);
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid #1f1f1f;
-    color: #777;
-    margin-top: 40px;
+.description{
+font-size:0.95em;
+color:var(--gray);
+margin-bottom:12px;
 }
+
+.price{
+font-weight:700;
+margin-bottom:15px;
+color:#1d4ed8;
+}
+
+/* button */
+
+.whatsapp-btn{
+display:inline-block;
+padding:12px 20px;
+background:#25D366;
+color:#fff;
+text-decoration:none;
+border-radius:12px;
+font-weight:bold;
+transition:.25s;
+}
+
+.whatsapp-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* footer */
+
+footer{
+text-align:center;
+padding:25px;
+border-top:1px solid var(--border);
+color:var(--gray);
+margin-top:40px;
+}
+
+/* floating animation */
+
+@keyframes floatCard{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-7px);}
+100%{transform:translateY(0px);}
+}
+
+/* apparition */
+
+.card{
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp 0.8s forwards;
+}
+
+.card:nth-child(1){animation-delay:0.2s;}
+.card:nth-child(2){animation-delay:0.4s;}
+.card:nth-child(3){animation-delay:0.6s;}
+.card:nth-child(4){animation-delay:0.8s;}
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
-    <h1>Annonces XELIRA</h1>
-    <a href="dashboard.html">← Tableau de bord</a>
+<h1>Annonces XELIRA</h1>
+<a href="dashboard.html">← Tableau de bord</a>
 </header>
 
 <div class="container">
 
-    <div class="card">
-        <img src="https://files.catbox.moe/exooc3.jpg" alt="Xelira-XMD">
-        <h3>Xelira-XMD</h3>
-        <p class="description">Bot whatsapp x telegram bientôt disponible .</p>
-        <p class="price">0.0$</p>
-        <a class="whatsapp-btn" href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+Xelira+XMD" target="_blank">
-            📲 Commander
-        </a>
-    </div>
+<div class="card">
+<div class="badge">NOUVEAU</div>
+<img src="https://files.catbox.moe/exooc3.jpg">
+<h3>Xelira-XMD</h3>
+<p class="description">Bot WhatsApp et Telegram bientôt disponible.</p>
+<p class="price">0.0$</p>
+<a class="whatsapp-btn"
+href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+Xelira+XMD"
+target="_blank">📲 Commander</a>
+</div>
 
-    <div class="card">
-        <img src="https://files.catbox.moe/ba2b3h.jpg" alt="Méthode ban whatsapp">
-        <h3>Méthode ban</h3>
-        <p class="description">méthode pour bannir une personne sur WhatsApp.</p>
-        <p class="price">7$</p>
-        <a class="whatsapp-btn" href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+Méthode+ban" target="_blank">
-            📲 Commander
-        </a>
-    </div>
+<div class="card">
+<img src="https://files.catbox.moe/ba2b3h.jpg">
+<h3>Méthode ban</h3>
+<p class="description">Méthode avancée pour bannir un compte WhatsApp.</p>
+<p class="price">7$</p>
+<a class="whatsapp-btn"
+href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+Méthode+ban"
+target="_blank">📲 Commander</a>
+</div>
 
-    <div class="card">
-        <img src="https://files.catbox.moe/elrcgm.jpg" alt="télégram premium">
-        <h3>Telegram premium</h3>
-        <p class="description">telegram premium abonnement illimité.</p>
-        <p class="price">2$</p>
-        <a class="whatsapp-btn" href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+télégram+premium" target="_blank">
-            📲 Commander
-        </a>
-    </div>
+<div class="card">
+<img src="https://files.catbox.moe/elrcgm.jpg">
+<h3>Telegram premium</h3>
+<p class="description">Abonnement Telegram premium illimité.</p>
+<p class="price">2$</p>
+<a class="whatsapp-btn"
+href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+Telegram+premium"
+target="_blank">📲 Commander</a>
+</div>
 
-    <div class="card">
-        <img src="https://files.catbox.moe/nnfyk9.jpg" alt="Produit 4">
-        <h3>Api crasher</h3>
-        <p class="description">api crasher termux.</p>
-        <p class="price">5$</p>
-        <a class="whatsapp-btn" href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+télégram+crasher" target="_blank">
-            📲 Commander
-        </a>
-    </div>
+<div class="card">
+<img src="https://files.catbox.moe/nnfyk9.jpg">
+<h3>API Crasher</h3>
+<p class="description">API crasher compatible Termux.</p>
+<p class="price">5$</p>
+<a class="whatsapp-btn"
+href="https://wa.me/243861009310?text=Bonjour,+je+suis+intéressé+par+API+Crasher"
+target="_blank">📲 Commander</a>
+</div>
 
 </div>
 
-<footer>© Xelira Studio</footer>
-
-<script>
-// Ici tu peux ajouter un petit script si tu veux faire des animations ou interactions supplémentaires
-</script>
+<footer>
+© Xelira Studio • Plateforme officielle
+</footer>
 
 </body>
 </html>
