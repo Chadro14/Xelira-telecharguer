@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>XELIRA • Avis & Commentaires</title>
 
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -12,82 +12,148 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-    margin:0;
-    background:#0a0a0a;
-    font-family:Inter,sans-serif;
-    color:#fff;
+:root{
+    --blue:#0d6efd;
+    --white:#fff;
+    --bg:#f0f4ff;
+    --card:#fff;
+    --border:#cfe0ff;
+    --text:#111;
+    --shadow:rgba(13,110,253,0.25);
+    --hover-shadow:rgba(13,110,253,0.35);
 }
+
+*{box-sizing:border-box;font-family:Inter,sans-serif;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);}
+
+/* HEADER */
 header{
     text-align:center;
-    padding:20px;
-    border-bottom:1px solid #1f1f1f;
+    padding:30px 20px;
+    border-bottom:1px solid var(--border);
+    background: linear-gradient(135deg, #0d6efd, #4da3ff);
+    color: var(--white);
+    border-radius:0 0 20px 20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
-header h1{color:#ff007f}
+header h1{color:var(--white); margin-bottom:5px;}
+header p{color:var(--white); font-weight:500;}
+
+/* CONTAINER */
 .container{
-    max-width:800px;
+    max-width:900px;
     margin:auto;
-    padding:20px;
+    padding:25px 20px;
 }
-.card{
-    background:#111;
-    border:1px solid #1f1f1f;
-    border-radius:16px;
-    padding:15px;
+
+/* INPUTS & BUTTON */
+input, textarea, select{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--white);
+    color:var(--text);
+    font-size:15px;
+}
+button, .gmail-btn{
+    background: linear-gradient(135deg, #0d6efd, #4da3ff);
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    color:var(--white);
+    font-weight:bold;
+    cursor:pointer;
+    transition:all 0.3s;
     margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-size:16px;
+}
+button:hover, .gmail-btn:hover{
+    background: linear-gradient(135deg, #084fc7, #2c7dff);
+    transform:translateY(-2px);
+}
+
+/* COMMENT CARDS */
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:15px 20px;
+    margin-bottom:15px;
+    box-shadow:0 6px 20px var(--shadow);
     opacity:0;
     transform:translateY(15px);
-    animation:fadeIn 0.5s forwards;
-    transition:transform 0.3s, box-shadow 0.3s;
+    animation:fadeInUp 0.7s forwards;
+    position:relative;
+    overflow:hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 20px #ff007f;
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 10px 30px var(--hover-shadow);
+}
+.card strong{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:16px;
+}
+.card strong::before{
+    content:"\1F464"; /* emoji utilisateur */
+    font-size:18px;
 }
 .stars{
-    color:#ffcc00;
+    color:var(--blue);
     font-size:18px;
     margin-bottom:5px;
 }
-input, textarea, select{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #1f1f1f;
-    background:#000;
-    color:#fff;
-}
-button{
-    background:#ff007f;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    color:#000;
-    font-weight:bold;
-    cursor:pointer;
-}
-footer{
-    text-align:center;
-    padding:20px;
-    border-top:1px solid #1f1f1f;
-    color:#777;
-}
 
-/* Animations */
-@keyframes fadeIn{
-    to{opacity:1; transform:translateY(0);}
-}
+/* TYPEWRITER EFFECT */
 .typewriter{
     overflow:hidden;
     white-space:nowrap;
-    border-right:3px solid #ff007f;
+    border-right:3px solid var(--blue);
     animation:typing 1s steps(40, end) forwards;
 }
 @keyframes typing{
     from{width:0;}
     to{width:100%;}
 }
+@keyframes fadeInUp{
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    color:#666;
+    margin-top:40px;
+    font-style:italic;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid var(--border);
+    color:#777;
+}
+.gmail-btn img{
+    width:20px;
+    height:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+    .card{padding:12px;}
+    button, .gmail-btn{font-size:14px;padding:10px 12px;}
+}
+
 </style>
 </head>
 
@@ -100,24 +166,24 @@ footer{
 
 <div id="root" class="container"></div>
 
-<footer>© Xelira Studio</footer>
+<footer>© Xelira Studio — Contact : <a href="mailto:xelirastudio@gmail.com" style="color:var(--blue);text-decoration:none;">xelirastudio@gmail.com</a></footer>
 
 <script type="text/babel">
-
 const { useState, useEffect } = React;
 
-function TypeWriter({text}) {
+function TypeWriter({text, delay}){
     const [display, setDisplay] = useState("");
-
     useEffect(()=>{
         let i=0;
-        const interval = setInterval(()=>{
-            setDisplay(text.slice(0,i+1));
-            i++;
-            if(i>=text.length) clearInterval(interval);
-        },20); // vitesse d'écriture
-        return ()=>clearInterval(interval);
-    },[text]);
+        const timeout = setTimeout(()=>{
+            const interval = setInterval(()=>{
+                setDisplay(text.slice(0,i+1));
+                i++;
+                if(i>=text.length) clearInterval(interval);
+            },20);
+        }, delay);
+        return ()=>clearTimeout(timeout);
+    },[text, delay]);
 
     return <p className="typewriter">{display}</p>;
 }
@@ -161,7 +227,6 @@ function App(){
 
     return(
         <div>
-
             <h2>Laisser un avis</h2>
 
             <input 
@@ -184,21 +249,29 @@ function App(){
                 <option value="1">1 étoile</option>
             </select>
 
-            <br/><br/>
+            <br/>
 
-            <button onClick={addComment}>Publier</button>
+            <button onClick={addComment}>
+                ✍ Publier
+            </button>
 
-            <hr style={{margin:"25px 0",borderColor:"#1f1f1f"}}/>
+            <br/>
+
+            <a className="gmail-btn" href="mailto:xelirastudio@gmail.com?subject=Avis Xelira" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail"/> Laisser un avis via Gmail
+            </a>
+
+            <hr style={{margin:"25px 0",borderColor:"#cfe0ff"}}/>
 
             <h2>Avis des utilisateurs</h2>
 
             {comments.map((c,index)=>(
-                <div className="card" key={index} style={{animationDelay:`${index*0.1}s`}}>
+                <div className="card" key={index} style={{animationDelay:`${index*500}ms`}}>
                     <strong>{c.name}</strong>
                     <div className="stars">
                         {"⭐".repeat(c.rating)}
                     </div>
-                    <TypeWriter text={c.text}/>
+                    <TypeWriter text={c.text} delay={index*500}/>
                 </div>
             ))}
 
@@ -207,8 +280,7 @@ function App(){
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-
 </script>
 
 </body>
-  </html>
+</html>
