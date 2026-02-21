@@ -2,289 +2,308 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Xelira Studio</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --pink: #ff007f;
-    --pink-glow: rgba(255, 0, 127, 0.5);
-    --bg: #000;
-    --white: #fff;
-    --gray: #bdbdbd;
+    --blue: #1a73ff;
+    --blue-soft: #eaf1ff;
+    --blue-glow: rgba(26,115,255,0.35);
+    --bg: #ffffff;
+    --white: #ffffff;
+    --gray: #6b7280;
     --font-tech: 'Orbitron', sans-serif;
     --font-ui: 'Inter', sans-serif;
 }
 
 /* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-html, body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: var(--font-ui);
-    height: 100%;
-    overflow-x: hidden;
+html,body{
+background:var(--bg);
+color:#0a0a0a;
+font-family:var(--font-ui);
+height:100%;
+overflow-x:hidden;
 }
 
-/* ================= INTRO ================= */
+/* INTRO */
 
-#xelira-stage {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 1s ease;
+#xelira-stage{
+position:fixed;
+inset:0;
+background:#ffffff;
+z-index:99999;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:opacity 1s ease;
 }
 
-.core-pulse {
-    width: 4px;
-    height: 4px;
-    background: var(--pink);
-    border-radius: 50%;
-    box-shadow: 0 0 25px var(--pink), 0 0 50px var(--pink);
-    animation: core-birth 1.8s ease-out forwards;
+.core-pulse{
+width:4px;
+height:4px;
+background:var(--blue);
+border-radius:50%;
+box-shadow:0 0 25px var(--blue),0 0 50px var(--blue);
+animation:core-birth 1.8s ease-out forwards;
 }
 
-.brand-wrapper {
-    position: absolute;
-    text-align: center;
-    opacity: 0;
-    animation: reveal-brand 1.2s forwards 2s;
+.brand-wrapper{
+position:absolute;
+text-align:center;
+opacity:0;
+animation:reveal-brand 1.2s forwards 2s;
 }
 
-.brand-text {
-    font-family: var(--font-tech);
-    font-size: 3.2rem;
-    font-weight: 900;
-    letter-spacing: 25px;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, transparent, #fff, var(--pink), #fff, transparent);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s infinite linear;
+.brand-text{
+font-family:var(--font-tech);
+font-size:clamp(2rem,6vw,3.2rem);
+font-weight:900;
+letter-spacing:18px;
+text-transform:uppercase;
+background:linear-gradient(90deg,transparent,#1a73ff,#ffffff,#1a73ff,transparent);
+background-size:200%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 3s infinite linear;
 }
 
-.intro-footer {
-    position: absolute;
-    bottom: 50px;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    animation: fade-up 1.5s forwards 2.5s;
+.intro-footer{
+position:absolute;
+bottom:40px;
+width:100%;
+text-align:center;
+opacity:0;
+animation:fade-up 1.5s forwards 2.5s;
 }
 
-.intro-footer p {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #666;
-    text-transform: uppercase;
+.intro-footer p{
+font-size:11px;
+letter-spacing:4px;
+color:#7a8bbf;
+text-transform:uppercase;
 }
 
-.intro-footer span {
-    color: var(--pink);
-    font-weight: bold;
+.intro-footer span{
+color:var(--blue);
+font-weight:bold;
 }
 
-.split-left, .split-right {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    background: #000;
-    z-index: 99998;
-    transition: transform 1.2s cubic-bezier(1, 0, 0, 1);
+.split-left,.split-right{
+position:fixed;
+top:0;
+bottom:0;
+width:50%;
+background:#ffffff;
+z-index:99998;
+transition:transform 1.2s cubic-bezier(1,0,0,1);
 }
 
-.split-left { left: 0; border-right: 1px solid var(--pink-glow); }
-.split-right { right: 0; border-left: 1px solid var(--pink-glow); }
-
-/* ================= HOME ================= */
-
-.main {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
+.split-left{
+left:0;
+border-right:1px solid var(--blue-glow);
 }
 
-.content {
-    max-width: 720px;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: content-reveal 1.4s ease forwards;
-    animation-delay: 6s;
+.split-right{
+right:0;
+border-left:1px solid var(--blue-glow);
 }
 
-.content h1 {
-    font-family: var(--font-tech);
-    font-size: 3rem;
-    letter-spacing: 6px;
-    margin-bottom: 20px;
+/* HOME */
+
+.main{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:25px;
+background:linear-gradient(to bottom,var(--white),var(--blue-soft));
 }
 
-.content p {
-    font-size: 1.1rem;
-    color: var(--gray);
-    line-height: 1.8;
-    margin-bottom: 40px;
+.content{
+max-width:720px;
+width:100%;
+opacity:0;
+transform:translateY(40px);
+animation:content-reveal 1.4s ease forwards;
+animation-delay:6s;
+}
+
+.content h1{
+font-family:var(--font-tech);
+font-size:clamp(1.8rem,5vw,3rem);
+letter-spacing:6px;
+margin-bottom:20px;
+color:var(--blue);
+}
+
+.content p{
+font-size:1rem;
+color:var(--gray);
+line-height:1.8;
+margin-bottom:35px;
 }
 
 /* Buttons */
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
 }
 
-.btn {
-    padding: 15px 38px;
-    border-radius: 40px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all .35s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+.btn{
+padding:14px 32px;
+border-radius:40px;
+font-size:.95rem;
+font-weight:600;
+text-decoration:none;
+transition:all .35s ease;
+display:inline-flex;
+align-items:center;
+gap:10px;
 }
 
-.btn-start {
-    background: var(--pink);
-    color: #000;
-    box-shadow: 0 0 25px var(--pink-glow);
+.btn-start{
+background:var(--blue);
+color:#fff;
+box-shadow:0 0 20px var(--blue-glow);
 }
 
-.btn-start:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 40px var(--pink);
+.btn-start:hover{
+transform:translateY(-3px);
+box-shadow:0 0 35px var(--blue);
 }
 
-.btn-whatsapp {
-    border: 1px solid #25D366;
-    color: #25D366;
+.btn-whatsapp{
+border:1px solid #25D366;
+color:#25D366;
+background:#fff;
 }
 
-.btn-whatsapp:hover {
-    background: #25D366;
-    color: #000;
+.btn-whatsapp:hover{
+background:#25D366;
+color:#fff;
 }
 
-/* WhatsApp Icon */
-.btn-whatsapp svg {
-    width: 20px;
-    height: 20px;
+/* Mobile parfait */
+
+@media(max-width:480px){
+
+.actions{
+flex-direction:column;
 }
 
-/* ================= ANIMATIONS ================= */
-
-@keyframes core-birth {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(15); opacity: 1; }
-    100% { transform: scale(1); box-shadow: 0 0 120px var(--pink); }
+.btn{
+width:100%;
+justify-content:center;
 }
 
-@keyframes reveal-brand {
-    from { opacity: 0; letter-spacing: 45px; filter: blur(25px); }
-    to { opacity: 1; letter-spacing: 18px; filter: blur(0); }
 }
 
-@keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Animations */
+
+@keyframes core-birth{
+0%{transform:scale(0);opacity:0;}
+50%{transform:scale(15);opacity:1;}
+100%{transform:scale(1);box-shadow:0 0 120px var(--blue);}
 }
 
-@keyframes shine {
-    to { background-position: 200% center; }
+@keyframes reveal-brand{
+from{opacity:0;letter-spacing:40px;filter:blur(20px);}
+to{opacity:1;letter-spacing:12px;filter:blur(0);}
 }
 
-@keyframes content-reveal {
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fade-up{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes shine{
+to{background-position:200% center;}
+}
+
+@keyframes content-reveal{
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div class="split-left" id="door-l"></div>
 <div class="split-right" id="door-r"></div>
 
 <div id="xelira-stage">
-    <div class="core-pulse"></div>
+<div class="core-pulse"></div>
 
-    <div class="brand-wrapper">
-        <h1 class="brand-text">XELIRA</h1>
-        <p style="letter-spacing:6px;font-size:10px;color:var(--pink);margin-top:15px;font-weight:bold;">
-            STUDIO NUMÉRIQUE 
-        </p>
-    </div>
-
-    <div class="intro-footer">
-        <p>Xelira Studio présente : <span>Xelira Téléchargeur</span></p>
-    </div>
+<div class="brand-wrapper">
+<h1 class="brand-text">XELIRA</h1>
+<p style="letter-spacing:6px;font-size:10px;color:#1a73ff;margin-top:15px;font-weight:bold;">
+STUDIO NUMÉRIQUE
+</p>
 </div>
 
-<!-- HOME -->
+<div class="intro-footer">
+<p>Xelira Studio présente : <span>Xelira Téléchargeur</span></p>
+</div>
+</div>
+
 <section class="main">
-    <div class="content">
-        <h1>XELIRA STUDIO</h1>
-        <p>
-            Salut, nous sommes <strong>Xelira Studio</strong>, votre partenaire numérique.  
-            Vivez des expériences uniques avec notre nouvelle mise à jour, pensée pour la performance,
-            l’élégance et l’innovation.
-        </p>
+<div class="content">
+<h1>XELIRA STUDIO</h1>
+<p>
+Salut, nous sommes <strong>Xelira Studio</strong>, votre partenaire numérique.
+Vivez des expériences uniques avec notre nouvelle mise à jour,
+pensée pour la performance, l’élégance et l’innovation.
+</p>
 
-        <div class="actions">
-            <a href="dashboard.html" class="btn btn-start">📱 Commencer l’App</a>
+<div class="actions">
+<a href="dashboard.html" class="btn btn-start">📱 Commencer l’App</a>
 
-            <a href="https://whatsapp.com/channel/0029Vb6aMu46RGJOcGGe1H1O"
-               target="_blank"
-               class="btn btn-whatsapp">
-                <!-- WhatsApp SVG -->
-                <svg viewBox="0 0 32 32" fill="currentColor">
-                    <path d="M19.11 17.2c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.35-.8-.71-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.99 2.65 1.13 2.83c.14.18 1.95 2.97 4.73 4.16.66.28 1.18.45 1.58.57.66.21 1.26.18 1.74.11.53-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/>
-                </svg>
-                Rejoindre la chaîne WhatsApp
-            </a>
-        </div>
-    </div>
+<a href="https://whatsapp.com/channel/0029Vb6aMu46RGJOcGGe1H1O"
+target="_blank"
+class="btn btn-whatsapp">
+Rejoindre la chaîne WhatsApp
+</a>
+</div>
+</div>
 </section>
 
 <script>
-window.addEventListener("load", () => {
-    const stage = document.getElementById("xelira-stage");
-    const left = document.getElementById("door-l");
-    const right = document.getElementById("door-r");
+window.addEventListener("load",()=>{
+const stage=document.getElementById("xelira-stage");
+const left=document.getElementById("door-l");
+const right=document.getElementById("door-r");
 
-    setTimeout(() => {
-        stage.style.opacity = "0";
+setTimeout(()=>{
+stage.style.opacity="0";
 
-        setTimeout(() => {
-            left.style.transform = "translateX(-100%)";
-            right.style.transform = "translateX(100%)";
+setTimeout(()=>{
+left.style.transform="translateX(-100%)";
+right.style.transform="translateX(100%)";
 
-            setTimeout(() => {
-                stage.remove();
-                left.remove();
-                right.remove();
-            }, 1200);
-        }, 600);
-    }, 5000);
+setTimeout(()=>{
+stage.remove();
+left.remove();
+right.remove();
+},1200);
+
+},600);
+
+},5000);
 });
 </script>
 
