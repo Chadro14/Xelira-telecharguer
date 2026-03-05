@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>Xelira Studio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+<!-- Font Awesome pour les icônes WhatsApp -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
@@ -36,8 +35,7 @@ height:100%;
 overflow-x:hidden;
 }
 
-/* INTRO */
-
+/* ===== INTRO AMÉLIORÉE ===== */
 #xelira-stage{
 position:fixed;
 inset:0;
@@ -47,6 +45,26 @@ display:flex;
 justify-content:center;
 align-items:center;
 transition:opacity 1s ease;
+overflow:hidden;
+}
+
+/* Image de fond pour l'intro */
+.intro-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://files.catbox.moe/2sn7fz.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    animation: zoomBg 20s infinite alternate;
+}
+
+@keyframes zoomBg {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
 }
 
 .core-pulse{
@@ -56,6 +74,7 @@ background:var(--blue);
 border-radius:50%;
 box-shadow:0 0 25px var(--blue),0 0 50px var(--blue);
 animation:core-birth 1.8s ease-out forwards;
+z-index:2;
 }
 
 .brand-wrapper{
@@ -63,6 +82,7 @@ position:absolute;
 text-align:center;
 opacity:0;
 animation:reveal-brand 1.2s forwards 2s;
+z-index:3;
 }
 
 .brand-text{
@@ -85,6 +105,7 @@ width:100%;
 text-align:center;
 opacity:0;
 animation:fade-up 1.5s forwards 2.5s;
+z-index:3;
 }
 
 .intro-footer p{
@@ -187,15 +208,28 @@ transform:translateY(-3px);
 box-shadow:0 0 35px var(--blue);
 }
 
+/* BOUTON WHATSAPP AVEC VRAI LOGO */
 .btn-whatsapp{
 border:1px solid #25D366;
 color:#25D366;
 background:#fff;
+transition:all 0.3s;
+}
+
+.btn-whatsapp i {
+    font-size: 1.2rem;
+    transition:transform 0.3s;
 }
 
 .btn-whatsapp:hover{
 background:#25D366;
 color:#fff;
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(37,211,102,0.2);
+}
+
+.btn-whatsapp:hover i {
+    transform: scale(1.1);
 }
 
 /* Mobile parfait */
@@ -247,39 +281,42 @@ to{opacity:1;transform:translateY(0);}
 <div class="split-right" id="door-r"></div>
 
 <div id="xelira-stage">
-<div class="core-pulse"></div>
+    <!-- Image de fond pour l'intro -->
+    <div class="intro-bg"></div>
+    
+    <div class="core-pulse"></div>
 
-<div class="brand-wrapper">
-<h1 class="brand-text">XELIRA</h1>
-<p style="letter-spacing:6px;font-size:10px;color:#1a73ff;margin-top:15px;font-weight:bold;">
-STUDIO NUMÉRIQUE
-</p>
-</div>
+    <div class="brand-wrapper">
+        <h1 class="brand-text">XELIRA</h1>
+        <p style="letter-spacing:6px;font-size:10px;color:#1a73ff;margin-top:15px;font-weight:bold;">
+            STUDIO NUMÉRIQUE
+        </p>
+    </div>
 
-<div class="intro-footer">
-<p>Xelira Studio présente : <span>Xelira Téléchargeur</span></p>
-</div>
+    <div class="intro-footer">
+        <p>Xelira Studio présente : <span>Xelira Téléchargeur</span></p>
+    </div>
 </div>
 
 <section class="main">
-<div class="content">
-<h1>XELIRA STUDIO</h1>
-<p>
-Salut, nous sommes <strong>Xelira Studio</strong>, votre partenaire numérique.
-Vivez des expériences uniques avec notre nouvelle mise à jour,
-pensée pour la performance, l’élégance et l’innovation.
-</p>
+    <div class="content">
+        <h1>XELIRA STUDIO</h1>
+        <p>
+            Salut, nous sommes <strong>Xelira Studio</strong>, votre partenaire numérique.
+            Vivez des expériences uniques avec notre nouvelle mise à jour,
+            pensée pour la performance, l'élégance et l'innovation.
+        </p>
 
-<div class="actions">
-<a href="dashboard.html" class="btn btn-start">📱 Commencer l’App</a>
+        <div class="actions">
+            <a href="dashboard.html" class="btn btn-start">📱 Commencer l'App</a>
 
-<a href="https://whatsapp.com/channel/0029Vb6aMu46RGJOcGGe1H1O"
-target="_blank"
-class="btn btn-whatsapp">
-Rejoindre la chaîne WhatsApp
-</a>
-</div>
-</div>
+            <a href="https://whatsapp.com/channel/0029Vb6aMu46RGJOcGGe1H1O"
+               target="_blank"
+               class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Rejoindre la chaîne WhatsApp
+            </a>
+        </div>
+    </div>
 </section>
 
 <script>
