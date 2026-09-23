@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0f">
+<title>Xelira Download</title>
+<style>
+:root{--bg:#080a0f;--card:#10131a;--card2:#0d1016;--line:#252b36;--text:#f7f8fb;--muted:#9299a7;--blue:#4f8cff;--blue2:#82adff;--green:#55d88a;--red:#ff6678}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -15%,#17233a,#080a0f 48%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}a{text-decoration:none;color:inherit}
+.header{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10;background:#080a0fcc;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff0d}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:18px}.brand span{color:var(--blue2)}.brand svg{width:35px;height:35px}.nav{display:flex;gap:23px;color:#aab0bd;font-size:13px}.nav a:hover{color:#fff}
+.hero{max-width:1000px;margin:auto;text-align:center;padding:76px 20px 42px}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #29344b;background:#111a2c;color:#91b8ff;border-radius:99px;font-size:12px;font-weight:750}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+h1{font-size:clamp(42px,8vw,78px);line-height:.98;letter-spacing:-4px;margin:22px 0 18px}h1 span{color:var(--blue2)}.sub{max-width:650px;margin:auto;color:var(--muted);line-height:1.7}
+.app{max-width:760px;margin:35px auto;background:#10131add;border:1px solid var(--line);border-radius:24px;padding:9px;box-shadow:0 30px 80px #0005}.search{display:flex;gap:8px;padding:7px;background:#0b0e14;border:1px solid #222833;border-radius:17px}.search input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;padding:14px}.btn{border:0;border-radius:12px;background:linear-gradient(135deg,#4f8cff,#326be0);color:#fff;font-weight:800;cursor:pointer;padding:0 21px}.btn:disabled{opacity:.55}.status{min-height:24px;padding:10px 5px 2px;color:var(--muted);font-size:13px}
+.result{border-top:1px solid var(--line);margin-top:8px;padding:17px 6px 5px;text-align:left}.result h3{font-size:14px;margin:0 0 12px}.actions{display:flex;gap:9px;flex-wrap:wrap}.download{padding:11px 14px;border-radius:10px;background:#eaf1ff;color:#245ec8;font-size:13px;font-weight:800}
+.grid{max-width:1000px;margin:0 auto 70px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card,.box{background:#10131acc;border:1px solid var(--line);border-radius:19px;padding:22px}.icon{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:#111a2c;margin-bottom:13px}.card h3{font-size:15px;margin:0 0 7px}.card p,.box p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}.section{max-width:900px;margin:0 auto 60px;padding:0 20px}.box h2{margin:0 0 10px;font-size:22px}.box p+p{margin-top:10px}.wa{display:inline-block;margin-top:14px;padding:12px 16px;border-radius:11px;background:#172b22;color:#77e0a5;font-size:13px;font-weight:800}
+footer{border-top:1px solid var(--line);padding:27px 20px;text-align:center;color:#687181;font-size:12px}
+.hidden{display:none!important}
+.overlay{position:fixed;inset:0;z-index:100;background:#04060ad9;backdrop-filter:blur(15px);display:grid;place-items:center;padding:20px}.modal{width:min(470px,100%);background:#10131a;border:1px solid #2a303c;border-radius:24px;padding:28px;box-shadow:0 35px 100px #0009}.modal h2{margin:0 0 8px;font-size:24px}.modal p{color:var(--muted);font-size:13px;line-height:1.65}.mark{width:50px;height:50px;margin-bottom:15px}.license{width:100%;padding:14px;border:1px solid #2b313d;background:#0b0e14;color:#fff;border-radius:12px;outline:0;margin:10px 0}.license:focus{border-color:var(--blue)}.activate{width:100%;height:48px}.buy{display:block;text-align:center;margin-top:12px;padding:13px;border:1px solid #29313f;border-radius:12px;color:#a9c7ff;font-size:13px;font-weight:750}.small{font-size:11px!important;color:#687181!important}.error{color:var(--red)!important}.success{color:var(--green)!important}
+.license-info{display:inline-flex;gap:7px;align-items:center;margin-top:11px;padding:7px 10px;border-radius:9px;background:#101a16;color:#7fe1a7;font-size:11px;font-weight:700}
+@media(max-width:700px){.nav{display:none}.header{padding:0 20px}.hero{padding-top:55px}.grid{grid-template-columns:1fr}.search{flex-direction:column}.btn{height:50px}h1{letter-spacing:-2.5px}}
+</style>
+</head>
+<body>
+
+<header class="header">
+<a class="brand" href="#">
+<svg viewBox="0 0 44 44" fill="none"><rect x="2" y="2" width="40" height="40" rx="13" fill="#17243d"/><path d="M13 14h18L13 30h18" stroke="#79aaff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Xelira <span>Download</span>
+</a>
+<nav class="nav"><a href="#fonctionnement">Fonctionnement</a><a href="#politique">Politique</a><a href="#opensource">Open Source</a></nav>
+</header>
+
+<!-- LICENCE FRONTEND -->
+<div class="overlay" id="activation">
+<div class="modal">
+<svg class="mark" viewBox="0 0 50 50" fill="none"><rect x="1" y="1" width="48" height="48" rx="15" fill="#16233b" stroke="#2b405f"/><path d="M18 24v-4a7 7 0 0 1 14 0v4M16 24h18v13H16z" stroke="#79aaff" stroke-width="2.6" stroke-linejoin="round"/></svg>
+<h2>Activation requise</h2>
+<p>Entre ta licence Xelira pour accéder au téléchargeur. Une licence est valable pendant la durée définie par l'auteur.</p>
+<input id="licenseInput" class="license" placeholder="Ex. XELIRA-THIERRY-2026" autocomplete="off">
+<button id="activateBtn" class="btn activate">Activer l'accès</button>
+<a class="buy" href="https://wa.me/?text=Bonjour%2C%20je%20souhaite%20obtenir%20ou%20renouveler%20ma%20licence%20Xelira%20Download." target="_blank" rel="noopener">💬 Obtenir / renouveler une licence sur WhatsApp</a>
+<p id="licenseStatus" class="small"></p>
+<p class="small">Démo frontend : les licences sont configurées dans ce fichier. Pour empêcher réellement la modification des dates ou le partage d'une licence, une validation serveur est nécessaire.</p>
+</div>
+</div>
+
+<main>
+<section class="hero" id="fonctionnement">
+<div class="pill"><i class="dot"></i> Service actif · Xelira</div>
+<h1>Télécharge tes vidéos<br><span>TikTok.</span></h1>
+<p class="sub">Une interface rapide et élégante pour récupérer les médias disponibles à partir d'un lien TikTok.</p>
+<div class="app">
+<div class="search"><input id="url" type="url" placeholder="Colle ton lien TikTok ici…" autocomplete="off"><button id="downloadBtn" class="btn">Télécharger</button></div>
+<div id="status" class="status">Colle un lien TikTok pour commencer.</div>
+<div id="result" class="result hidden"><h3>Résultats disponibles</h3><div id="actions" class="actions"></div></div>
+</div>
+<div id="licenseInfo"></div>
+</section>
+
+<div class="grid">
+<div class="card"><div class="icon">⚡</div><h3>Rapide</h3><p>Une interface légère pensée pour mobile et ordinateur.</p></div>
+<div class="card"><div class="icon">🔗</div><h3>Simple</h3><p>Colle le lien, récupère les résultats et choisis le format disponible.</p></div>
+<div class="card"><div class="icon">⌁</div><h3>Pour les devs</h3><p>Frontend personnalisable avec une logique de licence intégrée.</p></div>
+</div>
+
+<section class="section" id="politique"><div class="box">
+<h2>Politique d'utilisation</h2>
+<p>Xelira Download est une interface utilisant un service API tiers. L'utilisateur est responsable du contenu qu'il télécharge et doit respecter les droits d'auteur, les conditions d'utilisation de TikTok et les lois applicables. Xelira ne revendique aucun droit sur les contenus téléchargés.</p>
+<p>Les résultats dépendent du service API tiers et peuvent changer ou devenir indisponibles sans préavis.</p>
+</div></section>
+
+<section class="section" id="opensource"><div class="box">
+<h2>Open Source & développeurs</h2>
+<p>Cette interface peut être utilisée ou modifiée par des développeurs selon les conditions de distribution du projet.</p>
+<a class="wa" href="https://whatsapp.com/channel/0029Vb6aMu46RGJOcGGe1H1O" target="_blank" rel="noopener">→ Obtenir l'Open Source sur WhatsApp</a>
+</div></section>
+</main>
+
+<footer>© 2026 Xelira Download · Interface frontend</footer>
+
+<script>
+/*
+========================================================
+             CONFIGURATION DES LICENCES
+========================================================
+Une licence est associée à :
+- name : nom du client
+- expires : date d'expiration ISO
+
+IMPORTANT :
+Ce système est frontend uniquement. Un utilisateur qui
+modifie le JavaScript peut contourner la protection.
+Pour une vraie protection, déplace la validation sur un
+backend/API.
+========================================================
+*/
+const LICENSES = {
+  "XELIRA-THIERRY-2026": {
+    name: "Thierry",
+    expires: "2026-10-23"
+  },
+  "XELIRA-DEMO-2026": {
+    name: "Utilisateur Demo",
+    expires: "2026-12-31"
+  }
+};
+
+const activation = document.getElementById("activation");
+const licenseInput = document.getElementById("licenseInput");
+const licenseStatus = document.getElementById("licenseStatus");
+const activateBtn = document.getElementById("activateBtn");
+const licenseInfo = document.getElementById("licenseInfo");
+
+function todayStart(){
+  const d = new Date();
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+function parseExpiry(dateString){
+  // Date locale à minuit pour éviter les problèmes de fuseau.
+  const [y,m,d] = dateString.split("-").map(Number);
+  return new Date(y,m-1,d);
+}
+
+function isExpired(license){
+  return parseExpiry(license.expires) < todayStart();
+}
+
+function daysRemaining(license){
+  const diff = parseExpiry(license.expires) - todayStart();
+  return Math.max(0, Math.ceil(diff / 86400000));
+}
+
+function saveLicense(code){
+  localStorage.setItem("xelira_license", code);
+}
+
+function getSavedLicense(){
+  return localStorage.getItem("xelira_license");
+}
+
+function showLicenseInfo(code, license){
+  const days = daysRemaining(license);
+  licenseInfo.innerHTML =
+    '<span class="license-info">✓ '+escapeHtml(license.name)+
+    ' · '+days+' jour'+(days>1?'s':'')+' restant'+(days>1?'s':'')+
+    ' · expire le '+formatDate(license.expires)+'</span>';
+}
+
+function formatDate(value){
+  const [y,m,d] = value.split("-");
+  return d+"/"+m+"/"+y;
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function unlock(code){
+  const license = LICENSES[code];
+  if(!license) return false;
+  if(isExpired(license)) return false;
+  saveLicense(code);
+  showLicenseInfo(code, license);
+  activation.classList.add("hidden");
+  return true;
+}
+
+function checkSavedLicense(){
+  const saved = getSavedLicense();
+  if(!saved) return;
+
+  const license = LICENSES[saved];
+
+  if(!license){
+    localStorage.removeItem("xelira_license");
+    return;
+  }
+
+  if(isExpired(license)){
+    activation.classList.remove("hidden");
+    licenseStatus.textContent =
+      "Cette licence a expiré le "+formatDate(license.expires)+". Contacte l'auteur pour la renouveler.";
+    licenseStatus.className = "small error";
+    return;
+  }
+
+  unlock(saved);
+}
+
+activateBtn.addEventListener("click",()=>{
+  const code = licenseInput.value.trim().toUpperCase();
+
+  if(!code){
+    licenseStatus.textContent = "Entre un code de licence.";
+    licenseStatus.className = "small error";
+    return;
+  }
+
+  const license = LICENSES[code];
+
+  if(!license){
+    licenseStatus.textContent = "Licence inconnue. Contacte l'auteur sur WhatsApp.";
+    licenseStatus.className = "small error";
+    return;
+  }
+
+  if(isExpired(license)){
+    licenseStatus.textContent =
+      "Cette licence a expiré le "+formatDate(license.expires)+". Tu peux demander un renouvellement.";
+    licenseStatus.className = "small error";
+    return;
+  }
+
+  saveLicense(code);
+  showLicenseInfo(code, license);
+  licenseStatus.textContent = "✓ Licence activée.";
+  licenseStatus.className = "small success";
+  setTimeout(()=>activation.classList.add("hidden"),350);
+});
+
+licenseInput.addEventListener("keydown", e=>{
+  if(e.key==="Enter") activateBtn.click();
+});
+
+checkSavedLicense();
+
+/*
+========================================================
+                 TÉLÉCHARGEMENT TIKTOK
+========================================================
+*/
+const input = document.getElementById("url");
+const button = document.getElementById("downloadBtn");
+const status = document.getElementById("status");
+const result = document.getElementById("result");
+const actions = document.getElementById("actions");
+
+function isTikTokUrl(value){
+  try{
+    const u = new URL(value);
+    return /(^|\.)tiktok\.com$/i.test(u.hostname) ||
+           /(^|\.)vm\.tiktok\.com$/i.test(u.hostname);
+  }catch{
+    return false;
+  }
+}
+
+function addDownloadButton(label, href){
+  const a = document.createElement("a");
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.className = "download";
+  a.textContent = "↓ " + label;
+  actions.appendChild(a);
+}
+
+button.addEventListener("click", async()=>{
+  const saved = getSavedLicense();
+  const license = saved ? LICENSES[saved] : null;
+
+  // Double vérification avant chaque téléchargement.
+  if(!license || isExpired(license)){
+    activation.classList.remove("hidden");
+    status.textContent = "Ton abonnement doit être actif.";
+    return;
+  }
+
+  const url = input.value.trim();
+  result.classList.add("hidden");
+  actions.innerHTML = "";
+
+  if(!url){
+    status.textContent = "Colle d'abord un lien TikTok.";
+    return;
+  }
+
+  if(!isTikTokUrl(url)){
+    status.textContent = "Veuillez entrer un lien TikTok valide.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Chargement…";
+  status.textContent = "Récupération de la vidéo…";
+
+  try{
+    const response = await fetch(
+      "https://tikwm.com/api/?url=" + encodeURIComponent(url)
+    );
+
+    if(!response.ok) throw new Error("API inaccessible");
+
+    const data = await response.json();
+
+    if(!data || data.code !== 0 || !data.data){
+      throw new Error(data?.msg || "Aucune vidéo trouvée.");
+    }
+
+    const video = data.data;
+
+    if(video.play) addDownloadButton("Télécharger la vidéo", video.play);
+    if(video.hdplay) addDownloadButton("Télécharger HD", video.hdplay);
+    if(video.wmplay) addDownloadButton("Version watermark", video.wmplay);
+    if(video.music) addDownloadButton("Télécharger l'audio", video.music);
+
+    if(!actions.children.length){
+      throw new Error("Aucun lien de téléchargement disponible.");
+    }
+
+    result.classList.remove("hidden");
+    status.textContent = "Vidéo trouvée.";
+  }catch(error){
+    status.textContent = "Erreur : " + error.message;
+  }finally{
+    button.disabled = false;
+    button.textContent = "Télécharger";
+  }
+});
+
+input.addEventListener("keydown",e=>{
+  if(e.key==="Enter") button.click();
+});
+</script>
+</body>
+</html>
